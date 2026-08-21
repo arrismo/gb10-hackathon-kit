@@ -65,6 +65,10 @@ docker login nvcr.io
 
 Do not put tokens or API keys into this repository or on the external drive.
 
+## Why Qwen3.6
+
+This kit pins `nvidia/Qwen3.6-35B-A3B-NVFP4` because it is the configured local DGX Spark / GB10 model target and its NVFP4 format keeps offline inference practical on NVIDIA hardware.
+
 ## Disk usage
 
 The current prepared kit is approximately 33 GB, but use a drive with at least 100 GB free because images and models may change.
