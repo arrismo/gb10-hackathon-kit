@@ -1,6 +1,8 @@
 # nemoclaw-offline-kit
 
-Prepare an external SSD/USB drive with the large assets needed for a DGX Spark / GB10 NemoClaw + OpenClaw + OpenShell local inference setup.
+Prepare an external drive for DGX Spark / GB10 demos.
+
+It caches large NemoClaw, OpenShell, vLLM, Docker, and Qwen assets before hackathon day.
 
 ```text
 OpenClaw
@@ -14,17 +16,35 @@ Qwen3.6
 DGX Spark / GB10
 ```
 
-The goal is to avoid downloading tens of gigabytes over slow venue Wi‑Fi.
+Use this to avoid large downloads over venue Wi‑Fi.
 
 ## What this project does not do
 
-It does not build or include an agent, ship model weights or NVIDIA container images through Git, store credentials, modify/format drives, or guarantee a fully air-gapped install. Official upstream installers may still fetch small dependencies.
+It does not build an agent.
+It does not ship model weights.
+It does not ship Docker images.
+It does not store credentials.
+It does not format drives.
+It does not guarantee a fully air-gapped install.
 
 ## Requirements
 
-Preparation machine: macOS or Linux, Bash, Git, curl, Docker, Hugging Face CLI (`hf`), and NVIDIA NGC access for `nvcr.io`.
+Preparation machine:
 
-Target machine: NVIDIA DGX Spark / GB10, Linux ARM64, NVIDIA drivers, Docker.
+- macOS or Linux
+- Bash
+- Git
+- curl
+- Docker
+- Hugging Face CLI (`hf`)
+- NVIDIA NGC access for `nvcr.io`
+
+Target machine:
+
+- NVIDIA DGX Spark / GB10
+- Linux ARM64
+- NVIDIA drivers
+- Docker
 
 ## Quick start
 
@@ -34,9 +54,11 @@ cd gb10-hackathon-kit
 ./scripts/prepare-all.sh /Volumes/HACKATHON
 ```
 
-Replace `/Volumes/HACKATHON` with your actual external drive path. Every script requires the drive path as its first argument. The scripts never format or erase the drive.
+Replace `/Volumes/HACKATHON` with your drive path.
 
-To only initialize the drive layout and check status without downloading large assets:
+The scripts never format or erase the drive.
+
+To only create folders and check status:
 
 ```bash
 ./scripts/prepare-drive.sh /Volumes/HACKATHON
@@ -63,15 +85,16 @@ hf auth login
 docker login nvcr.io
 ```
 
-Do not put tokens or API keys into this repository or on the external drive.
+Never put tokens or API keys in this repo.
 
 ## Why Qwen3.6
 
-This kit pins `nvidia/Qwen3.6-35B-A3B-NVFP4` because it is the configured local DGX Spark / GB10 model target and its NVFP4 format keeps offline inference practical on NVIDIA hardware.
+Qwen3.6 NVFP4 is the pinned local model for this DGX Spark / GB10 kit.
 
 ## Disk usage
 
-The current prepared kit is approximately 33 GB, but use a drive with at least 100 GB free because images and models may change.
+The current kit is about 33 GB.
+Use a drive with at least 100 GB free.
 
 ## External drive layout
 
@@ -102,6 +125,10 @@ docker load -i <drive>/docker/nemoclaw-sandbox-base-arm64.tar
 docker load -i <drive>/docker/node22-arm64-build-images.tar
 ```
 
-Copy the model to the GB10 internal SSD before inference. Run the saved NemoClaw installer and prefer the DGX Spark/local inference path. Cached assets are primarily a fallback if the official installer would otherwise perform a large download.
+Copy the model to the GB10 internal SSD.
+Run the saved NemoClaw installer.
+Choose the DGX Spark / local inference path.
 
-See `docs/` for architecture and troubleshooting notes.
+Cached assets are a fallback for large installer downloads.
+
+See `docs/` for more details.
