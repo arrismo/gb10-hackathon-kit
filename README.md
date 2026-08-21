@@ -29,12 +29,19 @@ Target machine: NVIDIA DGX Spark / GB10, Linux ARM64, NVIDIA drivers, Docker.
 ## Quick start
 
 ```bash
-git clone <repo-url>
-cd nemoclaw-offline-kit
+git clone https://github.com/arrismo/gb10-hackathon-kit.git
+cd gb10-hackathon-kit
 ./scripts/prepare-all.sh /Volumes/HACKATHON
 ```
 
-Every script requires the external drive path as its first argument. The scripts never format or erase the drive.
+Replace `/Volumes/HACKATHON` with your actual external drive path. Every script requires the drive path as its first argument. The scripts never format or erase the drive.
+
+To only initialize the drive layout and check status without downloading large assets:
+
+```bash
+./scripts/prepare-drive.sh /Volumes/HACKATHON
+./scripts/verify-kit.sh /Volumes/HACKATHON
+```
 
 Run stages independently:
 

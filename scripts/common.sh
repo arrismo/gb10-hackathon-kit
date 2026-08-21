@@ -46,11 +46,16 @@ ensure_layout() {
 }
 
 human_size() {
-  local path="$1"
+  local path="$1" size=""
   if [ ! -e "$path" ]; then
     echo "missing"
-  elif du -sh "$path" >/dev/null 2>&1; then
-    du -sh "$path" | awk '{print $1}'
+    return 0
+  fi
+  # macOS external volumes may contain protected system directories such as
+  # .Spotlight-V100. Use the first usable du line even if du exits non-zero.
+  size="$(du -sh "$path" 2>/dev/null | awk 'NR==1 {print $1}')" || true
+  if [ -n "$size" ]; then
+    echo "$size"
   else
     echo "unknown"
   fi
