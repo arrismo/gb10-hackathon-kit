@@ -1,4 +1,4 @@
-# nemoclaw-offline-kit
+# gb10-hackathon-kit
 
 Prepare an external drive for DGX Spark / GB10 demos.
 
