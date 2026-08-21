@@ -1,0 +1,12 @@
+.env
+.env.*
+*.tar
+*.tar.gz
+!tests/fixtures/**/*.tar
+!tests/fixtures/**/*.tar.gz
+models/
+docker/
+downloads/
+.DS_Store
+ngc-api-key*
+*token*
